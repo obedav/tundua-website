@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - Tundua Edu Consult</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .login-container {
+      max-width: 450px;
+      margin: 100px auto;
+    }
+    .login-logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .login-logo img {
+      max-width: 150px;
+    }
+    .card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+    .card-header {
+      background-color: #fff;
+      border-bottom: 1px solid rgba(0,0,0,.125);
+      padding: 20px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+      border-radius: 10px 10px 0 0 !important;
+    }
+    .btn-primary {
+      background-color: #06a3da;
+      border-color: #06a3da;
+    }
+    .btn-primary:hover {
+      background-color: #0591c1;
+      border-color: #0591c1;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-logo">
+      <img src="/img/tundua.png" alt="Tundua Logo">
+      <h2 class="mt-3 text-primary">Tundua Admin</h2>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        Admin Login
+      </div>
+      <div class="card-body p-4">
+        <!-- Flash Messages -->
+        <% if(typeof errors !== 'undefined' && errors.length > 0) { %>
+          <% errors.forEach(function(error) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <%= error.msg %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% }); %>
+        <% } %>
+        
+        <% if(typeof success_msg !== 'undefined' && success_msg.length > 0) { %>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <%= success_msg %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% } %>
+        
+        <% if(typeof error_msg !== 'undefined' && error_msg.length > 0) { %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%= error_msg %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% } %>
+        
+        <% if(typeof error !== 'undefined' && error.length > 0) { %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%= error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% } %>
+        
+        <!-- Login Form -->
+        <form action="/admin/login" method="POST">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+              <input type="email" class="form-control" id="email" name="email" placeholder="admin@example.com" required>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+              <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+            </div>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary py-2">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <div class="text-center mt-4">
+      <a href="/" class="text-decoration-none">
+        <i class="fas fa-arrow-left me-1"></i> Back to Website
+      </a>
+    </div>
+  </div>
+  
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

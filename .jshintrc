@@ -1,0 +1,10 @@
+{
+  "esversion": 8,
+  "node": true,
+  "asi": true,
+  "laxbreak": true,
+  "laxcomma": true,
+  "undef": true,
+  "unused": true,
+  "trailing": false
+}

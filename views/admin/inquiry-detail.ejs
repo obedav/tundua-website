@@ -1,0 +1,95 @@
+<%- include('../partials/header') %>
+
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Inquiry Details</h1>
+      <a href="/admin/inquiries" class="btn btn-primary">
+        <i class="fas fa-arrow-left"></i> Back to Inquiries
+      </a>
+    </div>
+  
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Inquiry Details</h6>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Name:</strong> <%= inquiry.name %></p>
+            <p><strong>Email:</strong> <a href="mailto:<%= inquiry.email %>"><%= inquiry.email %></a></p>
+            <p><strong>Phone:</strong> <%= inquiry.phone || 'Not provided' %></p>
+            <p><strong>Subject:</strong> <%= inquiry.subject %></p>
+            <p><strong>Date:</strong> <%= new Date(inquiry.date || inquiry.createdAt).toLocaleString() %></p>
+            <p><strong>Status:</strong> 
+              <span class="badge badge-<%= 
+                inquiry.status === 'new' ? 'primary' : 
+                inquiry.status === 'read' ? 'info' : 
+                'success' 
+              %>">
+                <%= inquiry.status %>
+              </span>
+            </p>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h6 class="m-0 font-weight-bold">Message</h6>
+              </div>
+              <div class="card-body">
+                <p><%= inquiry.message %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <div class="d-flex justify-content-between">
+              <a href="mailto:<%= inquiry.email %>" class="btn btn-primary">
+                <i class="fas fa-reply"></i> Reply
+              </a>
+              <button id="deleteInquiry" class="btn btn-danger" data-id="<%= inquiry._id %>">
+                <i class="fas fa-trash"></i> Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Delete inquiry handler
+      document.getElementById('deleteInquiry').addEventListener('click', function() {
+        const id = this.getAttribute('data-id');
+        
+        if (confirm('Are you sure you want to delete this inquiry? This action cannot be undone.')) {
+          // Create and send the DELETE request
+          fetch('/admin/inquiries/' + id, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Delete response:', data);
+            
+            if (data.success) {
+              // Redirect to inquiries list
+              window.location.href = '/admin/inquiries';
+            } else {
+              alert(data.message || 'Error deleting inquiry');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while deleting the inquiry');
+          });
+        }
+      });
+    });
+  </script>
+
+<%- include('../partials/footer') %>

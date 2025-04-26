@@ -1,0 +1,85 @@
+<div class="newsletter-section py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto text-center">
+        <h4>Subscribe to Our Newsletter</h4>
+        <p>Stay updated with the latest study abroad opportunities and educational news.</p>
+        <form id="newsletterForm" class="mt-3">
+          <div class="input-group">
+            <input type="email" class="form-control" id="newsletterEmail" placeholder="Your Email" required>
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="submit" id="subscribeBtn">
+                <span id="subscribeText">Subscribe</span>
+                <span id="subscribeSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+              </button>
+            </div>
+          </div>
+          <div class="form-text text-muted mt-2">We'll never share your email with anyone else.</div>
+          <div id="newsletterMessage" class="mt-2"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('#newsletterForm').submit(function(e) {
+      e.preventDefault();
+      
+      // Get email
+      const email = $('#newsletterEmail').val();
+      
+      // Validate email
+      if (!email) {
+        $('#newsletterMessage').html('<div class="alert alert-danger">Please enter your email address.</div>');
+        return;
+      }
+      
+      // Show loading state
+      $('#subscribeBtn').prop('disabled', true);
+      $('#subscribeText').text('Subscribing...');
+      $('#subscribeSpinner').removeClass('d-none');
+      
+      // Submit form
+      $.ajax({
+        type: 'POST',
+        url: '/api/newsletter-subscribe',
+        data: JSON.stringify({ email }),
+        contentType: 'application/json',
+        success: function(response) {
+          // Reset form
+          $('#newsletterForm')[0].reset();
+          
+          // Show success message
+          $('#newsletterMessage').html(`<div class="alert alert-success">${response.message}</div>`);
+          
+          // Reset button state
+          $('#subscribeBtn').prop('disabled', false);
+          $('#subscribeText').text('Subscribe');
+          $('#subscribeSpinner').addClass('d-none');
+          
+          // Clear message after 5 seconds
+          setTimeout(function() {
+            $('#newsletterMessage').html('');
+          }, 5000);
+        },
+        error: function(xhr) {
+          // Show error message
+          let errorMessage = 'An error occurred. Please try again.';
+          
+          if (xhr.responseJSON && xhr.responseJSON.message) {
+            errorMessage = xhr.responseJSON.message;
+          }
+          
+          $('#newsletterMessage').html(`<div class="alert alert-danger">${errorMessage}</div>`);
+          
+          // Reset button state
+          $('#subscribeBtn').prop('disabled', false);
+          $('#subscribeText').text('Subscribe');
+          $('#subscribeSpinner').addClass('d-none');
+        }
+      });
+    });
+  });
+</script>

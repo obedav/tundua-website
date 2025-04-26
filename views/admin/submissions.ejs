@@ -1,0 +1,177 @@
+<!-- views/admin/submissions.ejs -->
+
+<%- include('../partials/header') %>
+
+<div class="container-fluid">
+  <h1 class="h3 mb-2 text-gray-800">Questionnaire Submissions</h1>
+  <p class="mb-4">View and manage all student questionnaire submissions.</p>
+
+  <div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+      <h6 class="m-0 font-weight-bold text-primary">All Submissions</h6>
+      <div class="d-flex align-items-center">
+        <form class="mr-2">
+          <div class="input-group">
+            <input type="text" class="form-control" name="search" placeholder="Search..." value="<%= typeof search !== 'undefined' ? search : '' %>">
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        
+        <div class="dropdown ml-2">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="statusFilterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filter by Status
+          </button>
+          <div class="dropdown-menu" aria-labelledby="statusFilterDropdown">
+            <a class="dropdown-item" href="?status=all">All</a>
+            <a class="dropdown-item" href="?status=new">New</a>
+            <a class="dropdown-item" href="?status=contacted">Contacted</a>
+            <a class="dropdown-item" href="?status=in-progress">In Progress</a>
+            <a class="dropdown-item" href="?status=completed">Completed</a>
+            <a class="dropdown-item" href="?status=rejected">Rejected</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="submissionsTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Country</th>
+              <th>Program</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if(submissions.length > 0) { %>
+              <% submissions.forEach(submission => { %>
+                <tr>
+                  <td><%= submission.firstName %> <%= submission.lastName %></td>
+                  <td><%= submission.email %></td>
+                  <td><%= submission.phone %></td>
+                  <td><%= submission.studyCountry %></td>
+                  <td><%= submission.intendedMajor %></td>
+                  <td>
+                    <span class="badge badge-<%= 
+                      submission.status === 'new' ? 'primary' : 
+                      submission.status === 'contacted' ? 'info' : 
+                      submission.status === 'in-progress' ? 'warning' : 
+                      submission.status === 'completed' ? 'success' : 
+                      'danger' 
+                    %>">
+                      <%= submission.status.charAt(0).toUpperCase() + submission.status.slice(1) %>
+                    </span>
+                  </td>
+                  <td><%= new Date(submission.date).toLocaleDateString() %></td>
+                  <td>
+                    <a href="/admin/submissions/<%= submission._id %>" class="btn btn-info btn-sm">
+                      <i class="fas fa-eye"></i>
+                    </a>
+                    <button class="btn btn-danger btn-sm delete-submission" data-id="<%= submission._id %>">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              <% }); %>
+            <% } else { %>
+              <tr>
+                <td colspan="8" class="text-center">No submissions found</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Pagination -->
+      <% if (pages > 1) { %>
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center mt-4">
+            <% if (current > 1) { %>
+              <li class="page-item">
+                <a class="page-link" href="/admin/submissions?page=<%= current - 1 %>" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+            <% } %>
+            
+            <% for (let i = 1; i <= pages; i++) { %>
+              <li class="page-item <%= current == i ? 'active' : '' %>">
+                <a class="page-link" href="/admin/submissions?page=<%= i %>"><%= i %></a>
+              </li>
+            <% } %>
+            
+            <% if (current < pages) { %>
+              <li class="page-item">
+                <a class="page-link" href="/admin/submissions?page=<%= current + 1 %>" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            <% } %>
+          </ul>
+        </nav>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Delete submission handler
+  document.addEventListener('DOMContentLoaded', function() {
+    const deleteButtons = document.querySelectorAll('.delete-submission');
+    
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const id = this.getAttribute('data-id');
+        const row = this.closest('tr');
+        
+        if (confirm('Are you sure you want to delete this submission? This action cannot be undone.')) {
+          fetch(`/admin/submissions/${id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Delete response:', data);
+            
+            if (data.success) {
+              // Highlight row before removing
+              row.style.backgroundColor = '#ffdddd';
+              setTimeout(() => {
+                row.remove();
+                
+                // Check if table is now empty
+                const remainingRows = document.querySelectorAll('#dataTable tbody tr');
+                if (remainingRows.length === 0) {
+                  document.querySelector('.table-responsive').innerHTML = 
+                    '<div class="text-center py-4"><p>No submissions found.</p></div>';
+                }
+              }, 500);
+              
+              alert('Submission deleted successfully');
+            } else {
+              alert(data.message || 'Error deleting submission');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while deleting the submission');
+          });
+        }
+      });
+    });
+  });
+</script>
+
+<%- include('../partials/footer') %>

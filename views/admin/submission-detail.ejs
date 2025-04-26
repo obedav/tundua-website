@@ -1,0 +1,356 @@
+<!-- views/admin/submission-detail.ejs -->
+
+<%- include('../partials/header') %>
+
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Submission Details</h1>
+    <div>
+      <a href="/admin/submissions" class="btn btn-sm btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to All Submissions
+      </a>
+      <button class="btn btn-sm btn-danger ml-2 delete-submission" data-id="<%= submission._id %>">
+        <i class="fas fa-trash"></i> Delete Submission
+      </button>
+    </div>
+  </div>
+
+  <!-- Status Management Card -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+      <h6 class="m-0 font-weight-bold text-primary">Status Management</h6>
+      <span class="badge badge-<%= 
+        submission.status === 'new' ? 'primary' : 
+        submission.status === 'contacted' ? 'info' : 
+        submission.status === 'in-progress' ? 'warning' : 
+        submission.status === 'completed' ? 'success' : 
+        'danger' 
+      %> badge-lg">
+        Current Status: <%= submission.status.charAt(0).toUpperCase() + submission.status.slice(1) %>
+      </span>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="statusUpdate">Update Status</label>
+            <select id="statusUpdate" class="form-control">
+              <option value="new" <%= submission.status === 'new' ? 'selected' : '' %>>New</option>
+              <option value="contacted" <%= submission.status === 'contacted' ? 'selected' : '' %>>Contacted</option>
+              <option value="in-progress" <%= submission.status === 'in-progress' ? 'selected' : '' %>>In Progress</option>
+              <option value="completed" <%= submission.status === 'completed' ? 'selected' : '' %>>Completed</option>
+              <option value="rejected" <%= submission.status === 'rejected' ? 'selected' : '' %>>Rejected</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6 d-flex align-items-end">
+          <button id="updateStatusBtn" class="btn btn-primary">Update Status</button>
+        </div>
+      </div>
+      
+      <div class="row mt-3">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="notesUpdate">Admin Notes</label>
+            <textarea id="notesUpdate" class="form-control" rows="3"><%= submission.additionalInfo %></textarea>
+          </div>
+          <button id="updateNotesBtn" class="btn btn-success">Save Notes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Personal Information Card -->
+    <div class="col-xl-6 col-lg-6">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Personal Information</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <tr>
+                <th width="40%">Full Name</th>
+                <td><%= submission.firstName %> <%= submission.lastName %></td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <td><a href="mailto:<%= submission.email %>"><%= submission.email %></a></td>
+              </tr>
+              <tr>
+                <th>Phone</th>
+                <td><a href="tel:<%= submission.phone %>"><%= submission.phone %></a></td>
+              </tr>
+              <tr>
+                <th>Date of Birth</th>
+                <td><%= new Date(submission.dob).toLocaleDateString() %></td>
+              </tr>
+              <tr>
+                <th>Nationality</th>
+                <td><%= submission.nationality %></td>
+              </tr>
+              <tr>
+                <th>Address</th>
+                <td><%= submission.address %></td>
+              </tr>
+              <tr>
+                <th>Submission Date</th>
+                <td><%= new Date(submission.date).toLocaleString() %></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Academic Background Card -->
+    <div class="col-xl-6 col-lg-6">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Academic Background</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <tr>
+                <th width="40%">Highest Qualification</th>
+                <td><%= submission.highestQualification %></td>
+              </tr>
+              <tr>
+                <th>Graduation Year</th>
+                <td><%= submission.graduationYear %></td>
+              </tr>
+              <tr>
+                <th>Institution</th>
+                <td><%= submission.institution %></td>
+              </tr>
+              <tr>
+                <th>Field of Study</th>
+                <td><%= submission.fieldOfStudy %></td>
+              </tr>
+              <tr>
+                <th>GPA/Grade</th>
+                <td><%= submission.gpa %></td>
+              </tr>
+              <tr>
+                <th>English Test</th>
+                <td><%= submission.englishTest %></td>
+              </tr>
+              <tr>
+                <th>English Score</th>
+                <td><%= submission.englishScore %></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Study Preferences Card -->
+    <div class="col-xl-6 col-lg-6">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Study Preferences</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <tr>
+                <th width="40%">Study Level</th>
+                <td><%= submission.studyLevel %></td>
+              </tr>
+              <tr>
+                <th>Intended Major</th>
+                <td><%= submission.intendedMajor %></td>
+              </tr>
+              <tr>
+                <th>Preferred Country</th>
+                <td><%= submission.studyCountry %></td>
+              </tr>
+              <tr>
+                <th>Preferred University</th>
+                <td><%= submission.university %></td>
+              </tr>
+              <tr>
+                <th>Intake Date</th>
+                <td><%= submission.intakeDate %></td>
+              </tr>
+              <tr>
+                <th>Budget</th>
+                <td><%= submission.budget %></td>
+              </tr>
+              <% if (submission.referredSchool || submission.referredCourse) { %>
+              <tr>
+                <th>Referral Info</th>
+                <td>
+                  <% if (submission.referredSchool) { %>
+                    School: <%= submission.referredSchool %><br>
+                  <% } %>
+                  <% if (submission.referredCourse) { %>
+                    Course: <%= submission.referredCourse %>
+                  <% } %>
+                </td>
+              </tr>
+              <% } %>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Details Card -->
+    <div class="col-xl-6 col-lg-6">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Additional Details</h6>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label>Work Experience</label>
+            <div class="p-3 bg-light rounded">
+              <%= submission.experience %>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Extracurricular Activities</label>
+            <div class="p-3 bg-light rounded">
+              <%= submission.extracurricular %>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Career Goals</label>
+            <div class="p-3 bg-light rounded">
+              <%= submission.goals %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions Card -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Quick Actions</h6>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <a href="mailto:<%= submission.email %>" class="btn btn-primary btn-block">
+            <i class="fas fa-envelope"></i> Email Student
+          </a>
+        </div>
+        <div class="col-md-4 mb-3">
+          <a href="tel:<%= submission.phone %>" class="btn btn-info btn-block">
+            <i class="fas fa-phone"></i> Call Student
+          </a>
+        </div>
+        <div class="col-md-4 mb-3">
+          <button class="btn btn-success btn-block" id="generateReportBtn">
+            <i class="fas fa-file-pdf"></i> Generate Report
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Generate report handler
+    document.getElementById('generateReportBtn').addEventListener('click', function() {
+      const id = document.querySelector('.delete-submission').getAttribute('data-id');
+      window.location.href = `/admin/submissions/${id}/report`;
+    });
+    
+    // Delete submission handler
+    document.querySelector('.delete-submission').addEventListener('click', function() {
+      const id = this.getAttribute('data-id');
+      
+      if (confirm('Are you sure you want to delete this submission? This action cannot be undone.')) {
+        // Create and send the DELETE request
+        fetch('/admin/submissions/' + id, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Delete response:', data);
+          
+          if (data.success) {
+            // Redirect to submissions list
+            window.location.href = '/admin/submissions';
+          } else {
+            alert(data.message || 'Error deleting submission');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred while deleting the submission');
+        });
+      }
+    });
+    
+    // Status update handler
+    document.getElementById('updateStatusBtn').addEventListener('click', function() {
+      const id = document.querySelector('.delete-submission').getAttribute('data-id');
+      const status = document.getElementById('statusUpdate').value;
+      
+      fetch(`/admin/submissions/${id}/status`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ status })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Status updated successfully');
+          location.reload();
+        } else {
+          alert(data.message || 'Error updating status');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while updating status');
+      });
+    });
+    
+    // Notes update handler
+    document.getElementById('updateNotesBtn').addEventListener('click', function() {
+      const id = document.querySelector('.delete-submission').getAttribute('data-id');
+      const notes = document.getElementById('notesUpdate').value;
+      
+      fetch(`/admin/submissions/${id}/notes`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ notes })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Notes updated successfully');
+        } else {
+          alert(data.message || 'Error updating notes');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while updating notes');
+      });
+    });
+  });
+</script>
+
+<%- include('../partials/footer') %>

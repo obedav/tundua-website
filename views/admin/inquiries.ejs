@@ -1,0 +1,123 @@
+<%- include('../partials/header') %>
+
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">Inquiries</h1>
+  
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">All Inquiries</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <% if (inquiries && inquiries.length > 0) { %>
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Subject</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% inquiries.forEach(inquiry => { %>
+                                <tr>
+                                    <td><%= inquiry.name %></td>
+                                    <td><%= inquiry.email %></td>
+                                    <td><%= inquiry.phone || 'Not provided' %></td>
+                                    <td><%= inquiry.subject %></td>
+                                                                        <td>
+                                      <% if (inquiry.date) { %>
+                                        <%= new Date(inquiry.date).toLocaleDateString() %>
+                                      <% } else if (inquiry.createdAt) { %>
+                                        <%= new Date(inquiry.createdAt).toLocaleDateString() %>
+                                      <% } else { %>
+                                        No date available
+                                      <% } %>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-<%= 
+                                          inquiry.status === 'new' ? 'primary' : 
+                                          inquiry.status === 'read' ? 'info' : 
+                                          'success' 
+                                        %>">
+                                          <%= inquiry.status %>
+                                        </span>
+                                      </td>
+                                    <td>
+                                        <a href="/admin/inquiries/<%= inquiry._id %>" class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye"></i> View
+                                        </a>
+                                        <button class="btn btn-danger btn-sm delete-inquiry" data-id="<%= inquiry._id %>">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                <% } else { %>
+                    <div class="text-center py-4">
+                        <p>No inquiries found.</p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Delete inquiry handler
+        const deleteButtons = document.querySelectorAll('.delete-inquiry');
+        
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                
+                if (confirm('Are you sure you want to delete this inquiry? This action cannot be undone.')) {
+                    // Create and send the DELETE request
+                    fetch('/admin/inquiries/' + id, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Delete response:', data);
+                        
+                        if (data.success) {
+                            // Remove the row from the table
+                            const row = this.closest('tr');
+                            row.style.backgroundColor = '#ffdddd';
+                            setTimeout(() => {
+                                row.remove();
+                                
+                                // Check if table is now empty
+                                const remainingRows = document.querySelectorAll('#dataTable tbody tr');
+                                if (remainingRows.length === 0) {
+                                    document.querySelector('.table-responsive').innerHTML = 
+                                        '<div class="text-center py-4"><p>No inquiries found.</p></div>';
+                                }
+                            }, 500);
+                            
+                            alert('Inquiry deleted successfully');
+                        } else {
+                            alert(data.message || 'Error deleting inquiry');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while deleting the inquiry');
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+<%- include('../partials/footer') %>

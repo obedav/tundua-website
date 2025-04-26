@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submission Report - <%= submission.firstName %> <%= submission.lastName %></title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .report-header {
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #333;
+      padding-bottom: 10px;
+    }
+    .report-header h1 {
+      margin-bottom: 5px;
+    }
+    .report-section {
+      margin-bottom: 30px;
+    }
+    .report-section h2 {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    .info-item {
+      margin-bottom: 10px;
+    }
+    .info-item strong {
+      display: inline-block;
+      min-width: 150px;
+    }
+    .text-block {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    .footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+    }
+    @media print {
+      body {
+        padding: 0;
+      }
+      .no-print {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="report-header">
+    <h1>Tundua Edu Consult - Student Submission Report</h1>
+    <p>Generated on <%= currentDate %></p>
+  </div>
+  
+  <div class="no-print" style="text-align: center; margin-bottom: 20px;">
+    <button onclick="window.print()">Print Report</button>
+    <a href="/admin/submissions/<%= submission._id %>" style="margin-left: 15px;">Back to Details</a>
+  </div>
+
+  <div class="report-section">
+    <h2>Personal Information</h2>
+    <div class="info-grid">
+      <div class="info-item"><strong>Full Name:</strong> <%= submission.firstName %> <%= submission.lastName %></div>
+      <div class="info-item"><strong>Email:</strong> <%= submission.email %></div>
+      <div class="info-item"><strong>Phone:</strong> <%= submission.phone %></div>
+      <div class="info-item"><strong>Date of Birth:</strong> <%= new Date(submission.dob).toLocaleDateString() %></div>
+      <div class="info-item"><strong>Nationality:</strong> <%= submission.nationality %></div>
+      <div class="info-item"><strong>Address:</strong> <%= submission.address %></div>
+      <div class="info-item"><strong>Submission Date:</strong> <%= new Date(submission.date).toLocaleString() %></div>
+    </div>
+  </div>
+
+  <div class="report-section">
+    <h2>Academic Background</h2>
+    <div class="info-grid">
+      <div class="info-item"><strong>Highest Qualification:</strong> <%= submission.highestQualification %></div>
+      <div class="info-item"><strong>Graduation Year:</strong> <%= submission.graduationYear %></div>
+      <div class="info-item"><strong>Institution:</strong> <%= submission.institution %></div>
+      <div class="info-item"><strong>Field of Study:</strong> <%= submission.fieldOfStudy %></div>
+      <div class="info-item"><strong>GPA/Grade:</strong> <%= submission.gpa %></div>
+      <div class="info-item"><strong>English Test:</strong> <%= submission.englishTest %></div>
+      <div class="info-item"><strong>English Score:</strong> <%= submission.englishScore %></div>
+    </div>
+  </div>
+
+  <div class="report-section">
+    <h2>Study Preferences</h2>
+    <div class="info-grid">
+      <div class="info-item"><strong>Study Level:</strong> <%= submission.studyLevel %></div>
+      <div class="info-item"><strong>Intended Major:</strong> <%= submission.intendedMajor %></div>
+      <div class="info-item"><strong>Preferred Country:</strong> <%= submission.studyCountry %></div>
+      <div class="info-item"><strong>Preferred University:</strong> <%= submission.university %></div>
+      <div class="info-item"><strong>Intake Date:</strong> <%= submission.intakeDate %></div>
+      <div class="info-item"><strong>Budget:</strong> <%= submission.budget %></div>
+      <% if (submission.referredSchool || submission.referredCourse) { %>
+        <div class="info-item">
+          <strong>Referral Info:</strong>
+          <% if (submission.referredSchool) { %>School: <%= submission.referredSchool %><br><% } %>
+          <% if (submission.referredCourse) { %>Course: <%= submission.referredCourse %><% } %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="report-section">
+    <h2>Additional Details</h2>
+    
+    <div class="info-item">
+      <strong>Work Experience:</strong>
+      <div class="text-block"><%= submission.experience || 'Not provided' %></div>
+    </div>
+    
+    <div class="info-item">
+      <strong>Extracurricular Activities:</strong>
+      <div class="text-block"><%= submission.extracurricular || 'Not provided' %></div>
+    </div>
+    
+    <div class="info-item">
+      <strong>Career Goals:</strong>
+      <div class="text-block"><%= submission.goals || 'Not provided' %></div>
+    </div>
+  </div>
+
+  <div class="report-section">
+    <h2>Status Information</h2>
+    <div class="info-grid">
+      <div class="info-item">
+        <strong>Current Status:</strong> 
+        <%= submission.status.charAt(0).toUpperCase() + submission.status.slice(1) %>
+      </div>
+    </div>
+    
+    <% if (submission.additionalInfo) { %>
+      <div class="info-item">
+        <strong>Admin Notes:</strong>
+        <div class="text-block"><%= submission.additionalInfo %></div>
+      </div>
+    <% } %>
+  </div>
+
+  <div class="footer">
+    <p>This report is confidential and intended for internal use by Tundua Edu Consult only.</p>
+  </div>
+</body>
+</html>

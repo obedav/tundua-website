@@ -1,0 +1,466 @@
+
+
+      /*  .location-header {
+            background: url('../img/locations/usa-header.jpg') center center no-repeat;
+            background-size: cover;
+            position: relative;
+        }  */
+        
+        .location-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(6, 3, 141, 0.7);
+        }
+        
+        .school-card {
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .school-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .school-img-container {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .school-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .school-card:hover .school-img {
+            transform: scale(1.05);
+        }
+        
+        .country-info-section {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+        }
+        
+        .school-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(6, 3, 141, 0.8);
+            color: white;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+        }
+        
+        .course-btn {
+            margin-top: 10px;
+        }
+        
+        .popular-courses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .course-tag {
+            background-color: #e9ecef;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 5px;
+            color: #495057;
+            transition: all 0.3s ease;
+        }
+        
+        .course-tag:hover {
+            background-color: #06038d;
+            color: white;
+            text-decoration: none;
+        }
+
+
+        /* UK Styles */
+    
+      /*   .location-header {
+            background: url('../img/locations/uk-header.jpg') center center no-repeat;
+            background-size: cover;
+            position: relative;
+        }   */
+        .location-header {
+            background: url('../img/cat-3.jpg') center center no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .location-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(6, 3, 141, 0.7);
+        }
+        
+        .school-card {
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .school-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .school-img-container {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .school-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .school-card:hover .school-img {
+            transform: scale(1.05);
+        }
+        
+        .country-info-section {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+        }
+        
+        .school-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(6, 3, 141, 0.8);
+            color: white;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+        }
+        
+        .course-btn {
+            margin-top: 10px;
+        }
+        
+        .popular-courses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .course-tag {
+            background-color: #e9ecef;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 5px;
+            color: #495057;
+            transition: all 0.3s ease;
+        }
+        
+        .course-tag:hover {
+            background-color: #06038d;
+            color: white;
+            text-decoration: none;
+        }
+
+        .main-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0d47a1;
+          }
+          
+          .intro-text {
+            color: #555;
+            line-height: 1.8;
+          }
+          
+          .accordion-button:not(.collapsed) {
+            background-color: #0d47a1;
+            color: white;
+            box-shadow: none;
+          }
+          
+          .accordion-button:focus {
+            box-shadow: none;
+          }
+          
+          .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+          }
+          
+          .accordion-button.collapsed::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+          }
+          
+          .field-header {
+            background-color: #0d47a1;
+            color: white;
+            padding: 0.75rem;
+          }
+          
+          .icon-box {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background-color: #0d47a1;
+            color: white;
+          }
+          
+          .timeline-container {
+            position: relative;
+          }
+          
+          .timeline-container {
+            position: relative;
+          }
+          
+          .field-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+            transition: all 0.3s ease;
+          }
+          
+          .badge {
+            font-weight: 500;
+          }
+
+        /* Questionnaire Styles */
+
+      /*   .questionnaire-header {
+            background: url('img/questionnaire-bg.jpg') center center no-repeat;
+            background-size: cover;
+            position: relative;
+        }  */
+        
+        .questionnaire-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(6, 3, 141, 0.7);
+        }
+        
+        .form-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-control:focus {
+            border-color: #06038d;
+            box-shadow: 0 0 0 0.25rem rgba(6, 3, 141, 0.25);
+        }
+        
+        .form-label {
+            font-weight: 500;
+        }
+        
+        .required-field::after {
+            content: "*";
+            color: red;
+            margin-left: 4px;
+        }
+        
+        .form-section h3 {
+            border-bottom: 2px solid #06038d;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .progress-steps::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 5%;
+            width: 90%;
+            height: 2px;
+            background-color: #e9ecef;
+            z-index: 1;
+        }
+        
+        .step {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+            border: 2px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active .step-circle {
+            background-color: #06038d;
+            color: white;
+            border-color: #06038d;
+        }
+        
+        .step.completed .step-circle {
+            background-color: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+        
+        .step-label {
+            font-size: 0.8rem;
+            text-align: center;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        
+        .step.active .step-label {
+            color: #06038d;
+            font-weight: 600;
+        }
+        
+        .step.completed .step-label {
+            color: #28a745;
+        }
+        
+        .form-section-inner {
+            display: none;
+        }
+        
+        .form-section-inner.active {
+            display: block;
+        }
+        
+        .btn-nav {
+            min-width: 100px;
+        }
+
+
+     /* Canada Styles */
+    
+     /*  .location-header {
+        background: url('../img/locations/canada-header.jpg') center center no-repeat;
+        background-size: cover;
+        position: relative;
+    }  */
+    
+    .location-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(6, 3, 141, 0.7);
+    }
+    
+    .school-card {
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+    
+    .school-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .school-img-container {
+        height: 200px;
+        overflow: hidden;
+    }
+    
+    .school-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .school-card:hover .school-img {
+        transform: scale(1.05);
+    }
+    
+    .country-info-section {
+        background-color: #f8f9fa;
+        padding: 50px 0;
+    }
+    
+    .school-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: rgba(6, 3, 141, 0.8);
+        color: white;
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+        border-radius: 5px;
+    }
+    
+    .course-btn {
+        margin-top: 10px;
+    }
+    
+    .popular-courses {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 10px;
+    }
+    
+    .course-tag {
+        background-color: #e9ecef;
+        padding: 3px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        display: inline-block;
+        margin-bottom: 5px;
+        color: #495057;
+        transition: all 0.3s ease;
+    }
+    
+    .course-tag:hover {
+        background-color: #06038d;
+        color: white;
+        text-decoration: none;
+    }
+
+    /* Australia Styles */
+
+
+         /* Ireland Styles */
+
+
+              /* Europe Styles */
+        

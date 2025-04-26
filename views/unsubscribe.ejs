@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unsubscribe - Tundua Edu Consult</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding-top: 50px;
+    }
+    .unsubscribe-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 30px;
+      text-align: center;
+    }
+    .logo {
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="unsubscribe-container">
+      <img src="/img/logo.png" alt="Tundua Edu Consult" class="logo">
+      
+      <% if (success) { %>
+        <div class="alert alert-success">
+          <i class="fas fa-check-circle fa-2x mb-3"></i>
+          <h4>Unsubscribed Successfully</h4>
+          <p><%= message %></p>
+        </div>
+      <% } else { %>
+        <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-circle fa-2x mb-3"></i>
+                    <h4>Unsubscribe Failed</h4>
+                    <p><%= message %></p>
+                  </div>
+                <% } %>
+                
+                <p class="mt-4">If you have any questions or concerns, please <a href="/contact">contact us</a>.</p>
+                
+                <div class="mt-4">
+                  <a href="/" class="btn btn-primary">Return to Homepage</a>
+                </div>
+              </div>
+              
+              <div class="text-center mt-4 text-muted">
+                <small>&copy; <%= new Date().getFullYear() %> Tundua Edu Consult. All rights reserved.</small>
+              </div>
+            </div>
+            
+            <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+          </body>
+          </html>

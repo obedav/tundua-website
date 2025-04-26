@@ -1,0 +1,921 @@
+/********** Template CSS **********/
+:root {
+  --primary: #2f47ff;
+  --light: #f0fbfc;
+  --dark: #181d38;
+}
+
+.btn-primary {
+  background: #2f47ff !important;
+}
+.text-primary {
+  color: #2f47ff !important;
+}
+.bg-primary {
+  background-color: #e67817 !important;
+}
+a {
+  color: #e67817 !important;
+}
+
+.fw-medium {
+  font-weight: 600 !important;
+}
+
+.fw-semi-bold {
+  font-weight: 700 !important;
+}
+
+.back-to-top {
+  position: fixed;
+  display: none;
+  right: 45px;
+  bottom: 45px;
+  z-index: 99;
+}
+
+/* Custom Website Border */
+body {
+  margin: 0 15px 15px 15px; /* No top margin, margins on other sides */
+  border: 2px solid rgba(47, 71, 255, 0.3); /* Fainter blue border using transparency */
+  border-top: none; /* Remove top border */
+  border-radius: 0 0 20px 20px; /* Small radius on bottom corners only */
+  box-shadow: 0 0 10px rgba(47, 71, 255, 0.2); /* Lighter shadow */
+  min-height: 100vh;
+}
+
+/* Adjust sticky navbar to account for body margin */
+.navbar.sticky-top {
+  top: 0; /* No top margin */
+  left: 15px;
+  right: 15px;
+  width: auto;
+}
+
+/* Adjust back-to-top button */
+.back-to-top {
+  right: 30px;
+  bottom: 30px;
+}
+
+/*** Spinner ***/
+#spinner {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
+  z-index: 99999;
+}
+
+#spinner.show {
+  transition: opacity 0.5s ease-out, visibility 0s linear 0s;
+  visibility: visible;
+  opacity: 1;
+}
+
+/*** Button ***/
+.btn {
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  transition: 0.5s;
+}
+
+.btn.btn-primary,
+.btn.btn-secondary {
+  color: #ffffff;
+}
+
+.btn-square {
+  width: 38px;
+  height: 38px;
+}
+
+.btn-sm-square {
+  width: 32px;
+  height: 32px;
+}
+
+.btn-lg-square {
+  width: 48px;
+  height: 48px;
+}
+
+.btn-square,
+.btn-sm-square,
+.btn-lg-square {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: normal;
+  border-radius: 0px;
+}
+
+/*** Navbar ***/
+.navbar .dropdown-toggle::after {
+  border: none;
+  content: "\f107";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  margin-right: 30px;
+  padding: 25px 0;
+  color: #ffffff;
+  font-size: 15px;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link.active {
+  color: var(--primary);
+}
+
+@media (max-width: 991.98px) {
+  .navbar-light .navbar-nav .nav-link {
+    margin-right: 0;
+    padding: 10px 0;
+  }
+
+  .navbar-light .navbar-nav {
+    border-top: 1px solid #eeeeee;
+  }
+}
+
+.navbar-light .navbar-brand,
+.navbar-light a.btn {
+  height: 75px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: var(--dark);
+  font-weight: 500;
+}
+
+.navbar-light.sticky-top {
+  top: -100px;
+  transition: 0.5s;
+}
+
+@media (min-width: 992px) {
+  .navbar .nav-item .dropdown-menu {
+    display: block;
+    margin-top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s;
+  }
+
+  .navbar .dropdown-menu.fade-down {
+    top: 100%;
+    transform: rotateX(-75deg);
+    transform-origin: 0% 0%;
+  }
+
+  .navbar .nav-item:hover .dropdown-menu {
+    top: 100%;
+    transform: rotateX(0deg);
+    visibility: visible;
+    transition: 0.5s;
+    opacity: 1;
+  }
+}
+
+.dropdown-menu {
+  border-radius: 0;
+  border: none;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+  padding: 10px 20px;
+  transition: all 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: #2f47ff;
+  color: #fff;
+}
+
+.fade-down {
+  animation: fadeInDown 0.3s ease;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-link.dropdown-toggle::after {
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+@media (max-width: 991.98px) {
+  .dropdown-menu {
+    border: none;
+    box-shadow: none;
+    padding-left: 1rem;
+  }
+  
+  .dropdown-item {
+    padding: 8px 0;
+  }
+  
+  .dropdown-item:hover {
+    background-color: transparent;
+    color: #2f47ff;
+  }
+}
+
+
+/* Service Item Hover Effects */
+.service-item {
+  position: relative;
+  background: #f0fbfc;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  min-height: 250px; /* Ensure minimum height */
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+/* Handle empty service items - make sure they show content */
+.service-item hr {
+  border-color: rgba(24, 29, 56, 0.2);
+  margin: 15px 0;
+}
+
+/* Fix for empty service icons */
+.service-icon:empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: #e67817 !important; /* Use your primary color */
+}
+
+.service-icon:empty:before {
+  content: "→";
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
+
+.service-item:hover, 
+.service-item.hover-active,
+.service-item.content-visible {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-item ul.list-group {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.3s ease;
+  overflow: hidden;
+}
+
+.service-item:hover ul.list-group,
+.service-item.hover-active ul.list-group,
+.service-item.content-visible ul.list-group {
+  max-height: 500px; /* Adjust based on content */
+  opacity: 1;
+}
+
+/* Destination Item Hover Effects */
+.destination-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.destination-overlay {
+  background: rgba(24, 29, 56, 0.7);
+  transition: opacity 0.4s ease;
+}
+
+.destination-overlay h5, 
+.destination-overlay p {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.destination-item:hover .destination-overlay,
+.destination-item.active-hover .destination-overlay,
+.destination-item.hover-locked .destination-overlay {
+  opacity: 1 !important;
+}
+
+.destination-item:hover .destination-overlay h5,
+.destination-item:hover .destination-overlay p,
+.destination-item.active-hover .destination-overlay h5,
+.destination-item.active-hover .destination-overlay p,
+.destination-item.hover-locked .destination-overlay h5,
+.destination-item.hover-locked .destination-overlay p {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Workshop Items Hover Effect */
+.bg-light .d-flex {
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.bg-light .d-flex .ms-3 span {
+  display: block;
+  transition: max-height 0.4s ease;
+  overflow: hidden;
+  max-height: 80px; /* Content stays visible */
+}
+
+/* Add visual indication that items are clickable */
+.service-item, .destination-item {
+  cursor: pointer;
+}
+
+.service-item::after, .destination-item::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(24, 29, 56, 0.3);
+  transition: all 0.3s ease;
+}
+
+.service-item.content-visible::after,
+.destination-item.hover-locked::after {
+  background-color: #ff6700; /* Tundua's primary color */
+  transform: scale(1.5);
+}
+
+
+/*** Header carousel - Modified Height ***/
+/* Default height for all screen sizes */
+.header-carousel .owl-carousel-item {
+  position: relative;
+  height: 600px; /* Reduced from default/implicit height */
+}
+
+.header-carousel .owl-carousel-item img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+  .header-carousel .owl-carousel-item {
+    position: relative;
+    min-height: 350px; /* Reduced from 500px */
+  }
+}
+
+/* Keep the rest of the carousel styling unchanged */
+.header-carousel .owl-nav {
+  position: absolute;
+  top: 50%;
+  right: 8%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+}
+
+.header-carousel .owl-nav .owl-prev,
+.header-carousel .owl-nav .owl-next {
+  margin: 7px 0;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: transparent;
+  border: 1px solid #ffffff;
+  font-size: 22px;
+  transition: 0.5s;
+}
+
+.header-carousel .owl-nav .owl-prev:hover,
+.header-carousel .owl-nav .owl-next:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+
+
+
+
+
+
+/*** Updated Study Locations ***/
+.location-item {
+  height: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s;
+  position: relative;
+}
+
+.location-item:hover {
+  transform: translateY(-10px);
+}
+
+.location-item img {
+  width: 100%;
+  height: 100%;
+  transition: 0.5s;
+  object-fit: cover;
+}
+
+.location-item:hover img {
+  transform: scale(1.1);
+}
+
+/* Location name banner that's always visible */
+.location-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(69, 90, 249, 0.85);
+  color: white;
+  padding: 12px 15px;
+  font-weight: 600;
+  z-index: 2;
+  text-align: center;
+  transition: 0.3s;
+  font-size: 18px;
+}
+
+/* Full overlay only visible on hover */
+.location-item .overlay {
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.location-item:hover .overlay {
+  opacity: 1;
+}
+
+.location-item .overlay .p-4 {
+  text-align: center;
+}
+
+.location-item .btn {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.3s;
+}
+
+.location-item:hover .btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .location-item {
+    height: 250px;
+  }
+  
+  .location-item .overlay {
+    opacity: 1;
+    background: rgba(24, 29, 56, 0.8) !important;
+  }
+  
+  .location-item .btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .location-name {
+    padding: 8px 15px;
+    font-size: 16px;
+  }
+}
+
+/*** Section Title ***/
+.section-title {
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.section-title::before {
+  position: absolute;
+  content: "";
+  width: calc(100% + 80px);
+  height: 2px;
+  top: 4px;
+  left: -40px;
+  background: var(--primary);
+  z-index: -1;
+}
+
+.section-title::after {
+  position: absolute;
+  content: "";
+  width: calc(100% + 120px);
+  height: 2px;
+  bottom: 5px;
+  left: -60px;
+  background: var(--primary);
+  z-index: -1;
+}
+
+.section-title.text-start::before {
+  width: calc(100% + 40px);
+  left: 0;
+}
+
+.section-title.text-start::after {
+  width: calc(100% + 60px);
+  left: 0;
+}
+
+/*** Service ***/
+.service-item {
+  background: var(--light);
+  transition: 0.5s;
+}
+
+.service-item:hover {
+  margin-top: -10px;
+  background: var(--primary);
+}
+
+.service-item * {
+  transition: 0.5s;
+}
+
+.service-item:hover * {
+  color: var(--light) !important;
+}
+
+
+
+/*** Categories & Courses ***/
+.category img,
+.course-item img {
+  transition: 0.5s;
+}
+
+.category a:hover img,
+.course-item:hover img {
+  transform: scale(1.1);
+}
+
+/*** Team ***/
+.team-item img {
+  transition: 0.5s;
+}
+
+.team-item:hover img {
+  transform: scale(1.1);
+}
+
+/*** Testimonial ***/
+.testimonial-carousel::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  z-index: 1;
+}
+
+.testimonial-carousel::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .testimonial-carousel::before,
+  .testimonial-carousel::after {
+    width: 200px;
+  }
+}
+
+@media (min-width: 992px) {
+  .testimonial-carousel::before,
+  .testimonial-carousel::after {
+    width: 300px;
+  }
+}
+
+.testimonial-carousel .owl-item .testimonial-text,
+.testimonial-carousel .owl-item.center .testimonial-text * {
+  transition: 0.5s;
+}
+
+.testimonial-carousel .owl-item.center .testimonial-text {
+  background: var(--primary) !important;
+}
+
+.testimonial-carousel .owl-item.center .testimonial-text * {
+  color: #ffffff !important;
+}
+
+.testimonial-carousel .owl-dots {
+  margin-top: 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.testimonial-carousel .owl-dot {
+  position: relative;
+  display: inline-block;
+  margin: 0 5px;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #cccccc;
+  transition: 0.5s;
+}
+
+.testimonial-carousel .owl-dot.active {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+/*** Footer ***/
+.footer .btn.btn-social {
+  margin-right: 5px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--light);
+  font-weight: normal;
+  border: 1px solid #ffffff;
+  border-radius: 35px;
+  transition: 0.3s;
+}
+
+.footer .btn.btn-social:hover {
+  color: var(--primary);
+}
+
+.footer .btn.btn-link {
+  display: block;
+  margin-bottom: 5px;
+  padding: 0;
+  text-align: left;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: normal;
+  text-transform: capitalize;
+  transition: 0.3s;
+}
+
+.footer .btn.btn-link::before {
+  position: relative;
+  content: "\f105";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-right: 10px;
+}
+
+.footer .btn.btn-link:hover {
+  letter-spacing: 1px;
+  box-shadow: none;
+}
+
+.footer .copyright {
+  padding: 25px 0;
+  font-size: 15px;
+  border-top: 1px solid rgba(256, 256, 256, 0.1);
+}
+
+.footer .copyright a {
+  color: var(--light);
+}
+
+.footer .footer-menu a {
+  margin-right: 15px;
+  padding-right: 15px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer .footer-menu a:last-child {
+  margin-right: 0;
+  padding-right: 0;
+  border-right: none;
+}
+
+
+/* IMPORTANT: Override the rule that hides list content */
+.service-item ul.list-group {
+  max-height: 500px !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  transition: none !important;
+}
+
+/* Reset any color changes on hover that might affect visibility */
+.service-item:hover * {
+  color: inherit !important; /* Override the rule that changes text color on hover */
+}
+
+.service-item:hover .fa-check-circle {
+  color: #2f47ff !important; /* Keep checkmarks blue */
+}
+
+/* Override the background color change */
+.service-item:hover {
+  background: var(--light) !important; /* Keep the original background */
+  margin-top: -10px; /* Keep the upward movement */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Keep the shadow effect */
+}
+
+/* Add !important to make sure these rules take precedence */
+.service-item:hover ul.list-group,
+.service-item.hover-active ul.list-group,
+.service-item.content-visible ul.list-group,
+.service-item ul.list-group {
+  max-height: 500px !important;
+  opacity: 1 !important;
+}
+
+/* This fixes the initialization state */
+.service-item ul.list-group {
+  max-height: 500px !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+.overflow-hidden.rounded img {
+  height: 200px; /* Choose a consistent height */
+  width: 100%;
+  object-fit: cover; /* This ensures the image fills the space while maintaining aspect ratio */
+}
+
+.bg-light.rounded-bottom.p-3 {
+  min-height: 100px; /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.text-center.position-relative {
+  transition: all 0.3s ease;
+}
+
+.text-center.position-relative:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Process section specific styling - Add this to the end of your CSS file */
+
+/* Reset conflicting styles for process items only */
+.container-xxl.py-5 .service-item {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 100%;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Keep hover effect */
+.container-xxl.py-5 .service-item:hover {
+  transform: translateY(-5px);
+  background-color: #f8f9fa !important; /* Keep consistent background */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Reset text color changes on hover for process section */
+.container-xxl.py-5 .service-item:hover * {
+  color: inherit !important; 
+}
+
+/* Process icons styling */
+.process-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #e67817 !important; /* Use your orange color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Icon color */
+.process-icon i {
+  color: white !important;
+}
+
+/* Number styling */
+.process-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  background-color: #fff;
+  color: #2f47ff !important; /* Use your blue color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  border: 2px solid #fff;
+  z-index: 2;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+/* Style for the orientation list */
+.process-checklist {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 15px;
+}
+
+.process-checklist li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.process-checklist li i {
+  color: #2f47ff !important; /* Your blue color */
+  margin-right: 10px;
+}
+
+/* Add styles for the modern card design shown in screenshot */
+.process-card {
+  background-color: #f8ffff;
+  border-radius: 10px;
+  padding: 20px;
+  height: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.process-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.process-card h3 {
+  color: #2f47ff;
+  margin-bottom: 15px;
+}
+
+/* Process section header */
+.container-xxl.py-5 .section-title {
+  text-transform: uppercase;
+  font-weight: 600;
+  position: relative;
+}
+
+/* Ensure consistent spacing */
+.container-xxl.py-5 .row .col-lg-4 {
+  margin-bottom: 30px;
+}
