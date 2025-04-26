@@ -1,0 +1,6 @@
+File: .cpanel.yml
+```yaml
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home2/tunduaco/nodeapp
+    - /bin/cp -R * $DEPLOYPATH
